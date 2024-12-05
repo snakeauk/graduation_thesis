@@ -1,4 +1,42 @@
 #include "test.h"
+void    my_array_printf(int **array);
+void    print_network(t_node *network);
+
+void    print_network(t_node *network)
+{
+    t_node  *node;
+    int     count;
+    int     i;
+
+    node = network;
+    while (node)
+    {
+        printf("===:%d:===\n", node->name);
+        count = count_conect_node(node->array);
+
+        for (i = 0; i < count; i++)
+        {
+            printf("|");
+            if (i != count - 1)
+                printf("\t");
+            else
+                printf("\n");
+        }
+        for (i = 0; i < count; i++)
+        {
+            printf("%d", node->conected_node[i]->name);
+            if (i != count - 1)
+                printf("\t");
+            else
+                printf("\n");
+        }
+        printf("\n");
+
+        printf("=====================\n\n\n");
+
+        node = node->next;
+    }
+}
 
 void    my_array_printf(int **array)
 {

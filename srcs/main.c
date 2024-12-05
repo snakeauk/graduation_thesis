@@ -16,7 +16,10 @@ int main(int argc, char **argv)
         return EXIT_FAILURE;
     }
 
-    my_array_printf(array);
+    // KruskalMST(array);
+    my_algo(array);
+
+    // my_array_printf(array);
 
     free_array2((void **)array);
     return 0;

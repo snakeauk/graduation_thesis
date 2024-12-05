@@ -23,5 +23,6 @@ int **create_array(char *filename);
 
 // print.c
 void    my_array_printf(int **array);
+void    print_network(t_node *network);
 
 #endif
