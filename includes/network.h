@@ -6,6 +6,9 @@
 #include <stdio.h>
 #include "utils.h"
 
+#define N 47
+#define GROUP_MAX 5
+
 
 // ======================================================================
 // ======================== create_network.c ============================
@@ -15,15 +18,16 @@ typedef struct s_node
 {
     int      name;
     int      *array;
-    int     group_id; // 初期化 = -1
-    t_node   **conected_node; // 繋がっている先のノードのアドレスの配列
+    int      connect_count;
+    int      group_id; // 初期化 = -1
+    t_node   **connected_node; // 繋がっている先のノードのアドレスの配列
     t_node   *next; // 今回使わない　構造体をまとめるだけのやつ　最後はNULL
 }               t_node;
 
 t_node *input_network(int **array); // networkを作る関数。array[N][N]
 t_node *create_node(int **array, int name); // nodeを初期化する関数
 t_node  *search_node(t_node *network, int name); // nameのノードを返す関数
-int     count_conect_node(int *conect); // nodeに接続されているnodeの個数を返す関数。
+int     count_connect_node(int *connect); // nodeに接続されているnodeの個数を返す関数。
 void    free_network(t_node *network); // networkをfreeする関数、メモリリーク対策。
 
 // ======================================================================
@@ -34,10 +38,14 @@ void    free_network(t_node *network); // networkをfreeする関数、メモリ
 // ======================================================================
 // ======================== my_algo.c ===================================
 // ======================================================================
+#include "test.h"
 
 int my_algo(int **array);
-int search_start(int **array);
-void    print_network(t_node *network);
+t_node *get_next_node(t_node *network, int cur_group_id);
+int is_grouping(t_node *network);
+t_node *search_node_grouping(t_node *cur);
+int search_start(t_node *network);
+int search_group(t_node *network, int start);
 
 // ======================================================================
 // ======================================================================
@@ -54,7 +62,6 @@ void    print_network(t_node *network);
 // }           t_node;
 
 
-#define N 47
 
 // t_edge structure
 typedef struct s_edge {

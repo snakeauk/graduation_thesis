@@ -1,5 +1,7 @@
 #include "test.h"
+
 void    my_array_printf(int **array);
+void    print_network_group(t_node *network);
 void    print_network(t_node *network);
 
 void    print_network(t_node *network)
@@ -12,8 +14,7 @@ void    print_network(t_node *network)
     while (node)
     {
         printf("===:%d:===\n", node->name);
-        count = count_conect_node(node->array);
-
+        count = node->connect_count;
         for (i = 0; i < count; i++)
         {
             printf("|");
@@ -22,18 +23,35 @@ void    print_network(t_node *network)
             else
                 printf("\n");
         }
-        for (i = 0; i < count; i++)
+        i = 0;
+        while (node->connected_node[i])
         {
-            printf("%d", node->conected_node[i]->name);
+            printf("%d", node->connected_node[i]->name);
             if (i != count - 1)
                 printf("\t");
             else
                 printf("\n");
+            i++;
         }
         printf("\n");
 
         printf("=====================\n\n\n");
 
+        node = node->next;
+    }
+}
+
+void    print_network_group(t_node *network)
+{
+    t_node  *node;
+    int     count;
+    int     i;
+
+    node = network;
+    while (node)
+    {
+        printf("%d:===group_id: %d\n", node->name, node->group_id);
+        printf("\n\n");
         node = node->next;
     }
 }
