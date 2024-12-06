@@ -3,7 +3,7 @@
 int my_algo(int **array);
 t_node *get_next_node(t_node *network, int cur_group_id);
 int is_grouping(t_node *network);
-int search_start(t_node *network)
+int search_start(t_node *network);
 t_node *search_node_grouping(t_node *cur);
 int search_group(t_node *network, int start);
 

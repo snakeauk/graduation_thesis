@@ -1,4 +1,4 @@
-NAME		=	test
+NAME		=	program
 
 CC			=	cc
 CFLAGS		=	# -Wall -Wextra -Werror
